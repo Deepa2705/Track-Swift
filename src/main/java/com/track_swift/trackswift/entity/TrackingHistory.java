@@ -8,6 +8,7 @@ public class TrackingHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private ParcelStatus status;
     private String location;
 
