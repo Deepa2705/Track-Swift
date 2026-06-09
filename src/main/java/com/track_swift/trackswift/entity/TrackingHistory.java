@@ -9,9 +9,9 @@ public class TrackingHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private ParcelStatus status;
-    private String location;
-
     @Enumerated(EnumType.STRING)
+    private ParcelStatus status;
+
+    private String location;
     private String remarks;
 }
