@@ -15,4 +15,5 @@ public interface ParcelService {
     public void deleteParcel(Long id);
     public Parcel createParcel(ParcelRequestDto parcelRequestDto);
     public ParcelResponseDto createParcelResponse(Parcel parcel);
+    public ParcelResponseDto updateParcel(Long id,ParcelRequestDto parcelRequestDto);
 }
