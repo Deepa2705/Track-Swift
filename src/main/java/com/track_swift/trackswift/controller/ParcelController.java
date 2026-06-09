@@ -23,7 +23,7 @@ public class ParcelController {
         return parcelService.getParcels();
     }
 
-    @GetMapping("/parcels/{id}")
+    @GetMapping("/parcels/retrieve/{id}")
     public ParcelResponseDto getParcel(@PathVariable Long id){
         return parcelService.getParcel(id);
     }
@@ -33,7 +33,12 @@ public class ParcelController {
         return parcelService.addParcel(parcelRequestDto);
     }
 
-    @DeleteMapping("/parcels/{id}")
+    @PutMapping("/parcels/update/{id}")
+    public ParcelResponseDto updateParcel(@PathVariable Long id, @RequestBody ParcelRequestDto parcelRequestDto){
+        return parcelService.updateParcel(id, parcelRequestDto);
+    }
+
+    @DeleteMapping("/parcels/delete/{id}")
     public void deleteParcel(@PathVariable Long id){
         parcelService.deleteParcel(id);
     }

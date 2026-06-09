@@ -33,7 +33,6 @@ public class ParcelServiceImpl implements ParcelService{
     @Override
     public ParcelResponseDto addParcel(ParcelRequestDto parcelRequestDto) {
         Parcel parcel = createParcel(parcelRequestDto);
-        ParcelResponseDto parcelResponseDto = createParcelResponse(parcel);
         Parcel savedParcel = parcelRepository.save(parcel);
         return createParcelResponse(savedParcel);
     }
@@ -69,5 +68,25 @@ public class ParcelServiceImpl implements ParcelService{
     public ParcelResponseDto createParcelResponse(Parcel parcel) {
         ParcelResponseDto parcelResponseDto = new ParcelResponseDto(parcel.getId(),parcel.getTrackingNumber(),parcel.getSenderName(),parcel.getSenderPhone(),parcel.getSenderAddress(),parcel.getReceiverName(),parcel.getReceiverPhone(),parcel.getReceiverAddress(),parcel.getParcelWeight(),parcel.getReceiverName(),parcel.getStatus(),parcel.getExpectedDeliveryDate(), parcel.getCreatedAt(), parcel.getUpdatedAt());
         return parcelResponseDto;
+    }
+
+    @Override
+    public ParcelResponseDto updateParcel(Long id, ParcelRequestDto parcelRequestDto) {
+        Parcel existingParcel = parcelRepository.findById(id).orElseThrow(()->new RuntimeException("Parcel Not Found"));
+        existingParcel.setSenderName(parcelRequestDto.getSenderName());
+        existingParcel.setSenderPhone(parcelRequestDto.getSenderPhone());
+        existingParcel.setSenderAddress(parcelRequestDto.getSenderAddress());
+
+        existingParcel.setReceiverName(parcelRequestDto.getReceiverName());
+        existingParcel.setReceiverPhone(parcelRequestDto.getReceiverPhone());
+        existingParcel.setReceiverAddress(parcelRequestDto.getReceiverAddress());
+
+        existingParcel.setParcelWeight(parcelRequestDto.getParcelWeight());
+        existingParcel.setParcelType(parcelRequestDto.getParcelType());
+
+        existingParcel.setUpdatedAt(LocalDate.now());
+
+        Parcel savedParcel = parcelRepository.save(existingParcel);
+        return createParcelResponse(savedParcel);
     }
 }
