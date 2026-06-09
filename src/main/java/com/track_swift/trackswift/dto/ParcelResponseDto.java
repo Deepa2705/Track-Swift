@@ -1,20 +1,15 @@
-package com.track_swift.trackswift.entity;
+package com.track_swift.trackswift.dto;
 
 import com.track_swift.trackswift.enums.ParcelStatus;
-import jakarta.persistence.*;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
 import java.time.LocalDate;
-import java.util.Random;
+import java.util.Date;
 
-@Entity
-public class Parcel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ParcelResponseDto {
     private Long id;
-
-    @Column(unique = true)
     private Long trackingNumber;
-
     private String senderName;
     private String senderPhone;
     private String senderAddress;
@@ -25,16 +20,16 @@ public class Parcel {
     private String parcelType;
 
     @Enumerated(EnumType.STRING)
-    private ParcelStatus status = ParcelStatus.CREATED;
+    private ParcelStatus status;
 
     private LocalDate expectedDeliveryDate;
     private LocalDate createdAt;
     private LocalDate updatedAt;
 
-    public Parcel() {
+    public ParcelResponseDto() {
     }
 
-    public Parcel(Long id, Long trackingNumber, String senderName, String senderPhone, String senderAddress, String receiverName, String receiverPhone, String receiverAddress, Double parcelWeight, String parcelType, ParcelStatus status, LocalDate expectedDeliveryDate, LocalDate createdAt, LocalDate updatedAt) {
+    public ParcelResponseDto(Long id, Long trackingNumber, String senderName, String senderPhone, String senderAddress, String receiverName, String receiverPhone, String receiverAddress, Double parcelWeight, String parcelType, ParcelStatus status, LocalDate expectedDeliveryDate, LocalDate createdAt, LocalDate updatedAt) {
         this.id = id;
         this.trackingNumber = trackingNumber;
         this.senderName = senderName;
@@ -63,8 +58,8 @@ public class Parcel {
         return trackingNumber;
     }
 
-    public void setTrackingNumber() {
-        this.trackingNumber = 100000L + new Random().nextInt(900000);
+    public void setTrackingNumber(Long trackingNumber) {
+        this.trackingNumber = trackingNumber;
     }
 
     public String getSenderName() {
@@ -145,10 +140,6 @@ public class Parcel {
 
     public void setExpectedDeliveryDate(LocalDate expectedDeliveryDate) {
         this.expectedDeliveryDate = expectedDeliveryDate;
-    }
-
-    public void setTrackingNumber(Long trackingNumber) {
-        this.trackingNumber = trackingNumber;
     }
 
     public LocalDate getCreatedAt() {
