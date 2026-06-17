@@ -1,32 +1,29 @@
-package com.track_swift.trackswift.entity;
+package com.track_swift.trackswift.dto;
 
 import com.track_swift.trackswift.enums.Role;
-import jakarta.persistence.*;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
-@Entity
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UserResponseDto {
+
     private Long id;
 
     private String firstName;
     private String lastName;
     private String email;
-    private String password;
     private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public User() {
+    public UserResponseDto() {
     }
 
-    public User(Long id, String firstName, String email, String lastName, String password, String phoneNumber, Role role) {
+    public UserResponseDto(Long id, String firstName, String lastName, String email, String phoneNumber, Role role) {
         this.id = id;
         this.firstName = firstName;
-        this.email = email;
         this.lastName = lastName;
-        this.password = password;
+        this.email = email;
         this.phoneNumber = phoneNumber;
         this.role = role;
     }
@@ -61,14 +58,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getPhoneNumber() {
